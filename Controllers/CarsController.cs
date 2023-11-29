@@ -32,7 +32,34 @@ namespace GregsListDotNet.Controllers
                 return BadRequest(err.Message);
             }
         }
+        [HttpGet("{carId}")]
+        public ActionResult<Car> GetCarById(int carId)
+        {
+            try
+            {
+                Car car = _carsService.GetCarById(carId);
+                return Ok(car);
+            }
+            catch (Exception error)
+            {
 
+                return BadRequest(error.Message);
+            }
+        }
+
+        [HttpPut("{carId}")]
+        public ActionResult<Car> UpdateCar(int carId, [FromBody] Car carData)
+        {
+            try
+            {
+                Car car = _carsService.UpdateCar(carId, carData);
+                return Ok(car);
+            }
+            catch (Exception err)
+            {
+
+                return BadRequest(err.Message);
+            }
+        }
     }
-
 }
